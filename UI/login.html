@@ -17,22 +17,22 @@
 	</div>
 
 	<div class="wrap">
-		<form action="home.html" name="login" >
+		<form id="loginData" name="login">
 			<h2>Member Login</h2>
-			<input type="text" name="username" placeholder="Enter username">
-			<input type="password" name="password" placeholder="Enter your password">
+			<input type="text" name="username" id="username" placeholder="Enter username">
+			<input type="password" name="password" id="password" placeholder="Enter your password">
 			<br>
 			<br>
 			<!-- validate function is called when submit button is clicked-->
-			<input type="submit" value="Login" onclick="return validatelogin()">
+			<!-- <input type="submit" value="Login" onclick="return validatelogin()"> -->
+			<input type="submit" value="Login">
 			
-
-
 		</form>
 	</div>
 	
 <footer class="footer">
   <p>&copy; Copyright 2018, StackOverFlow-lite</p>
 </footer>
+<script src="js/login.js"></script>
 </body>
 </html>
