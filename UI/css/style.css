@@ -128,6 +128,9 @@ input{
 input[type="text"], input[type="email"],input[type="password"]{
     width: 90%;
 }
+#title{
+    width: 51.5%;
+}
 input[type="submit"]{
     width: 95%;
     background: #0481ff;

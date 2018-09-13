@@ -17,7 +17,7 @@ function logoutUser() {
                         window.location.replace('index.html')
                     } 
                     
-                    console.log(response.message)
+                    console.log(response.Message)
                 })
                 .catch((err) => console.log('Eve says '+err))
                 
