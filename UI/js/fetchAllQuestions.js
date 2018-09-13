@@ -4,7 +4,6 @@ function fetchQuestionData() {
 
     fetch('http://127.0.0.1:5000/api/v2/questions', {
         method: 'GET',
-        // mode:'cors',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -24,6 +23,11 @@ function fetchQuestionData() {
                 console.log(response.Questions)
                 for (let question in response.Questions){
                     let title = document.createElement('h3');
+                    title.addEventListener('click', function titleClick(){
+                        let clikedId = response.Questions[question].question_id;
+                        localStorage.setItem('clickedId',clikedId)
+                        window.location = 'fetch-specific-question.html'
+                    })
                     let titleText = document.createTextNode(response.Questions[question].title);
                     let content = document.createElement('p');
                     let contentText = document.createTextNode(response.Questions[question].content);
@@ -45,14 +49,13 @@ function fetchQuestionData() {
                     parentElement.appendChild(br);
                     parentElement.appendChild(answerButton);
 
-                    console.log(contentText)
+                    //console.log(response.Questions[question].question_id)
                 }
             }
             if (statusCode == 401){
                 alert(response.Message)
             }
         
-            console.log(response.Message)
         })
         .catch((err) => console.log('Eve says '+err))
         
