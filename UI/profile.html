@@ -9,7 +9,7 @@
   <a href="#" class="brand">StackOverflow-lite</a>
   <div class="header-right">
     <a href="home.html">Home</a>
-    <a href="profile.html" class="active">Profile</a>
+    <a href="profile.html" class="active" id="profile1">Profile</a>
     <a href="post-question.html">Post Question</a>
     <a href="recent-questions.html" >Recent Questions</a>
     <a href="../index.html">Logout </a>
@@ -17,7 +17,6 @@
 </div>
     <br>
     <br>
-
 <body>
 <table>
   <tr>
@@ -47,12 +46,7 @@
 <td>
 <div class="main-column3">
   <h2>Questions asked [15]</h2>
-  <ul>
-    <li>Its is not always a guarantee that you will get answers to all of your questions.<span>[answers 3]</span></li>
-    <li>Tea Its is not always a guarantee that you will get answers to all of your questions.<span>[answers 3]</span></li>
-    <li>Milk Its is not always a guarantee that you will get answers to all of your questions.<span>[answers 3]</span></li>
-    <li>Its is not always a guarantee that<span>[answers 3]</span></li>
-    <a href="#">Read More >></a>
+  <ul id="UserQuestions">
   </ul>
 
 </div>
@@ -105,5 +99,7 @@
 <footer class="footer">
     <p>&copy; Copyright 2018, StackOverflow-lite</p>
 </footer>
+<script src="js/retrieveUserQuestions.js"></script>
+<script src="js/fetchSpecificQuestion.js"></script>
  </body>
 </html>

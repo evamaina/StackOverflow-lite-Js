@@ -17,7 +17,6 @@ function fetchSpecificQuestionData() {
         .then((response) => {
             if (statusCode == 200){
                 let  parentElement = document.getElementById('all-quests');
-                console.log(response.Question)
                 let title = document.createElement('h3');
                 let titleText = document.createTextNode(response.Question.title);
                 let content = document.createElement('p');
@@ -44,7 +43,6 @@ function fetchSpecificQuestionData() {
                 alert(response.Message)
             }
         
-            console.log(response.Message)
         })
         .catch((err) => console.log('Eve says '+err))
         
