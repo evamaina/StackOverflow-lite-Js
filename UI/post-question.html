@@ -23,18 +23,18 @@
       
       <form>
           <h3 id="quest-title"></h3>
-          <p id="quest-body">Q1) I have a very simple django app that I am attempting to deploy to heroku, but it keeps crashing. Everything works fine on my local machine, but not on heroku</h3>
+          <p id="quest-body">Q1) I have a very simple django app that I am attempting to deploy to heroku, but it keeps crashing. Everything works fine on my local machine, but not on heroku<span>[Edit]</span></h3>
           <h4>Answer 1 </h4>
-          <p>It's better to import models that you will user, since it won't visually collide with django.db.models</p>
+          <p>It's better to import models that you will user, since it won't visually collide with django.db.models <span>[Accept]</span></p>
 
           <h4>Answer 2</h4>
           <p>I would suggest absolute imports as py3 get's rid of relative.</p>
           <h4>Answer 3</h4>
           <p>from . import models</p>
-          <textarea class="textarea" rows="3" cols="60" placeholder="Your Answer"></textarea>
+          <textarea class="textarea" rows="3" cols="60" id="answer-text"placeholder="Your Answer"></textarea>
           <br>
      
-        <input class="submit_q" type="button" value="Reply">
+        <input class="submit_q" type="button" id=value="Reply">
 
 
       </form>

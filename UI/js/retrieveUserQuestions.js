@@ -20,6 +20,8 @@ function fetchUserQuestionsData() {
 
                 for (let question in response.Questions){
                     let title = document.createElement('h3');
+                    lenquest= document.getElementById('len-quest')
+                    lenquest.innerHTML='Questions asked '+'['+response.Questions.length+']';
                     title.innerHTML = response.Questions[question].title;
                     parentElement.appendChild(title)
                     title.addEventListener('click', function callback(){
