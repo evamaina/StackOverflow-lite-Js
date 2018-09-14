@@ -27,10 +27,14 @@ function fetchSpecificQuestionData() {
                 textarea.setAttribute('class', 'textarea');
                 textarea.setAttribute('rows', '2');
                 textarea.setAttribute('cols', '60');
-                answerButton.setAttribute('class', 'submit_q')
+                textarea.setAttribute('id','submit_q');
+                answerButton.setAttribute('class', 'submit_q');
+                answerButton.setAttribute('id','submitAnswer');
                 textarea.setAttribute('placeholder', 'Your Answer');
-                answerButton.setAttribute('type', 'button');
-                answerButton.setAttribute('value', 'Reply');
+                textarea.setAttribute('id', 'textarea');
+                answerButton.setAttribute('id', 'submitAnswer');
+                answerButton.setAttribute('value', 'Reply')
+                answerButton.addEventListener('click',postAnswerData)
                 content.appendChild(contentText);
                 title.appendChild(titleText);
                 parentElement.appendChild(title)
@@ -38,6 +42,14 @@ function fetchSpecificQuestionData() {
                 parentElement.appendChild(textarea);
                 parentElement.appendChild(br);
                 parentElement.appendChild(answerButton);
+                let heading = document.createElement('h3')
+                heading.innerHTML='Answers:'
+                content.appendChild(heading)
+                for (let answer in response.Question.answers){
+                    let elemH6 = document.createElement('h6');
+                    elemH6.innerHTML = response.Question.answers[answer].answer_body;
+                    content.appendChild(elemH6)
+                }
             }
             if (statusCode == 401){
                 alert(response.Message)
@@ -45,7 +57,52 @@ function fetchSpecificQuestionData() {
         
         })
         .catch((err) => console.log('Eve says '+err))
+           
+}
+
+
+
+function postAnswerData() { 
+    let question_id = localStorage.getItem('clickedId')  
+    let answer_body = document.getElementById("textarea").value;
+    let token = localStorage.getItem('token')
+    let answer_data = JSON.stringify({
+        "answer_body":answer_body  
+        })
+
+    fetch('http://127.0.0.1:5000/api/v2/questions/' + question_id +'/answers', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+            
+        },
+        body: answer_data
+    })
+    .then((response) => {
+            statusCode = response.status
+            return response.json()
+        })
+        .then((response) => {
+            if (statusCode == 200){
+                alert(response.Message)
+            }
+            if (statusCode == 401){
+                alert(response.Message)
+            }
+            if (statusCode == 400){
+                alert(response.Message)
+            }
+            if (statusCode == 409){
+                alert(response.message)
+            }
+            console.log(response.Message)
+        })
+        .catch((err) => console.log('Eve says '+err))     
         
-        
-        
+}
+
+function displayAnswers(){
+
 }
