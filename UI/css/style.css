@@ -89,10 +89,34 @@ header{
     padding-bottom: 50px;
     float: left;
 }
+.wrapT{
+    position : relative;   
+    width: 800px;
+    height: auto;
+   /* margin-bottom: 0px;*/
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 25px;
+    background-color: white;
+}
+.center {
+    margin: auto;
+    width: 70%;
+    border: 3px dotted white;
+    padding: 10px;
+}
+#quest-title{
+    color: blue;
+    text-align: center;
+}
+#quest-body{
+    
+}
 .post_q{
         width: 350px;
         margin: auto;
-        margin-top: 50px;
+        margin-top: 80px;
+        margin-bottom: 50px;
 }
 .textarea{
         margin: auto;

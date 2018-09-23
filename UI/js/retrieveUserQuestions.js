@@ -34,18 +34,17 @@ function fetchUserQuestionsData() {
                     parentElement.appendChild(title)
                     parentElement.appendChild(delButton)
                     title.addEventListener('click', function callback(){
-                        localStorage.setItem('clickedId', question_id)
+                        localStorage.setItem('clickedId', question_id);
                         fetchSpecificQuestionData()
-                        console.log(profile)
-                        window.location = 'fetch-specific-question.html';
-                    })
+                        window.location = 'fetch-specific-question.html'
+                    });
                 }
             }
             if (statusCode == 401){
                 alert(response.Message)
                 //window.location = 'profile.html'
             }
-        
+
             console.log(response.Message)
         })
         .catch((err) => console.log('Eve says '+err))   
