@@ -37,6 +37,9 @@ function postData(event) {
                     if (statusCode == 400){
                         alert(response.Message)
                     }
+                    if (statusCode == 401){
+                        alert(response.Message)
+                    }
                     if (statusCode == 409){
                         alert(response.Message)
                     }
