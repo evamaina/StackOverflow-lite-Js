@@ -7,10 +7,8 @@ function fetchQuestionData() {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-            
-        },
-    
+            'Authorization': 'Bearer ' + token       
+        },  
     })
     .then((response) => {
             statusCode = response.status
@@ -28,28 +26,24 @@ function fetchQuestionData() {
                         localStorage.setItem('clickedId',clikedId)
                         window.location = 'fetch-specific-question.html'
                     })
+                    let author = document.createElement('p');
+                    let date = document.createElement('a');
                     let titleText = document.createTextNode(response.Questions[question].title);
-                    let content = document.createElement('p');
-                    let contentText = document.createTextNode(response.Questions[question].content);
-                    let textarea = document.createElement('textarea');
-                    let answerButton = document.createElement('input');
-                    let br = document.createElement('BR');
-                    textarea.setAttribute('class', 'textarea');
-                    textarea.setAttribute('rows', '2');
-                    textarea.setAttribute('cols', '60');
-                    answerButton.setAttribute('class', 'submit_q')
-                    textarea.setAttribute('placeholder', 'Your Answer');
-                    answerButton.setAttribute('type', 'button');
-                    answerButton.setAttribute('value', 'Reply');
-                    content.appendChild(contentText);
+                    let authorText = document.createTextNode('posted_by: '+ response.Questions[question].username
+                                                             + ' on: '+ response.Questions[question].posted_date);
+                    
+                    title.setAttribute('class','wrapT');
+                    parentElement.setAttribute('class','center1');
+                    author.style.color='blue';
+                    author.style.fontSize='11px'
+                    author.style.fontStyle='italic';
+                    author.appendChild(authorText)
                     title.appendChild(titleText);
+                    title.appendChild(author)
+                    title.appendChild(date)
                     parentElement.appendChild(title)
-                    parentElement.appendChild(content);
-                    parentElement.appendChild(textarea);
-                    parentElement.appendChild(br);
-                    parentElement.appendChild(answerButton);
 
-                    //console.log(response.Questions[question].question_id)
+
                 }
             }
             if (statusCode == 401){

@@ -1,5 +1,5 @@
 let profile = document.getElementById('profile1')
-profile.addEventListener('click', fetchUserQuestionsData());
+profile.addEventListener('load', fetchUserQuestionsData());
 function fetchUserQuestionsData() { 
     let token = localStorage.getItem('token')
     fetch('http://127.0.0.1:5000/api/v2/question/', {
@@ -17,6 +17,7 @@ function fetchUserQuestionsData() {
         .then((response) => {
             if (statusCode == 200){
                 let parentElement = document.getElementById('UserQuestions')
+                let parentElementRecent = document.getElementById('recentQuestions')
 
                 for (let question in response.Questions){
                     let title = document.createElement('h3');
@@ -39,13 +40,26 @@ function fetchUserQuestionsData() {
                         window.location = 'fetch-specific-question.html'
                     });
                 }
+                for (let recent in response.user_recent){
+                    let title = document.createElement('h3');
+                    let lenrecent= document.getElementById('len-recent')
+                    lenrecent.innerHTML='Recently asked '+'['+response.user_recent.length+']';
+                    title.innerHTML = response.user_recent[recent].title;
+                    let question_id = response.user_recent[recent].question_id;
+                    parentElementRecent.appendChild(title)
+                    title.addEventListener('click', function callback(){
+                        localStorage.setItem('clickedId', question_id);
+                        fetchSpecificQuestionData()
+                        window.location = 'fetch-specific-question.html'
+                    });
+                }
             }
             if (statusCode == 401){
                 alert(response.Message)
                 //window.location = 'profile.html'
             }
 
-            console.log(response.Message)
+            console.log(response)
         })
         .catch((err) => console.log('Eve says '+err))   
 }
