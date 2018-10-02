@@ -53,6 +53,9 @@ function fetchUserQuestionsData() {
                         window.location = 'fetch-specific-question.html'
                     });
                 }
+                MostAnsweredQuestion(response)
+                userAnswers(response)
+
             }
             if (statusCode == 401){
                 alert(response.Message)
@@ -89,4 +92,65 @@ function deleteMyQuestion(question_id) {
             console.log(response.Message)
         })
         .catch((err) => console.log('Eve says '+err))   
+}
+
+const MostAnsweredQuestion = (data) => {
+    let table = document.getElementById('MostAnsweredQuestion')
+    for (let question in data.most_answered) {
+        let tr = document.createElement('tr');
+        let td = document.createElement('td');
+        let questionNode = document.createTextNode(data.most_answered[question].title);
+        let h4 = document.createElement('h4');
+        h4.setAttribute('id', 'h4' + data.most_answered[question].question_id);
+        // h4.addEventListener('click', () => {
+        //     question_id = data.mostAnswered[question].question_id;
+        //     fetchQuestion(question_id);
+        // })
+        h4.appendChild(questionNode);
+        td.appendChild(h4);
+        tr.appendChild(td);
+        let answerData = document.createElement('td');
+        let answerElement = document.createElement('a');
+        let answervalue = `<a>Answers
+                        <i id="count">${data.most_answered[question].answer}</i>
+                    </a>`
+        answerElement.innerHTML = answervalue;
+        answerData.appendChild(answerElement)
+        tr.appendChild(answerData)
+        table.appendChild(tr);
+    }
+
+}
+const userAnswers = (data) => {
+    let table = document.getElementById('userAnswers')
+    for (let answer in data.my_answers) {
+        let tr = document.createElement('tr');
+        let td = document.createElement('td');
+        let answerNode = document.createTextNode(data.my_answers[answer].myanswer);
+        let h4 = document.createElement('h4');
+        h4.setAttribute('id', 'h4' + data.my_answers[answer].answer_id);
+        h4.addEventListener('click', () => {
+            question_id = data.my_answers[answer].question_id;
+            fetchQuestion(question_id);
+        })
+        h4.appendChild(answerNode);
+        td.appendChild(h4);
+        tr.appendChild(td);
+        let editCell = document.createElement('td');
+        editElement = document.createElement('a');
+        editElement.setAttribute('id', 'edit' + data.my_answers[answer].answer_id);
+        editElement.setAttribute('class', 'edit');
+        editElement.addEventListener('click', () => {
+            let question_id = data.my_answers[answer].question_id;
+            let answer_id = data.my_answers[answer].answer_id;
+            let myAnswer = data.my_answers[answer].myanswer;
+            editAnswer(question_id, answer_id, myAnswer)
+        })
+        let edit = document.createTextNode('Edit');
+        editElement.appendChild(edit);
+        editCell.appendChild(editElement)
+        tr.appendChild(editCell)
+        table.appendChild(tr);
+    }
+    console.log(data)
 }
