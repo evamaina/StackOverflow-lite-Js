@@ -24,17 +24,27 @@ function loginData(event) {
                 })
                 .then((response) => {
                     if (statusCode == 200){
-                        alert(response.Message)
+                        document.getElementById("msg").style.backgroundColor = '#d4edda';
+                        document.getElementById("msg").style.color = 'black';
+                        // document.getElementById("errorresponse").innerHTML = response.Message;
                         token = response.token
                         localStorage.setItem('token',token)
-                        console.log(localStorage.getItem('token'))
-                        window.location = 'home.html';
+                        console.log(localStorage.getItem('token'));
+                        var msg=document.getElementById("msg");
+                        msg.innerHTML=response.Message;
+                        window.setTimeout(() => window.location = 'home.html', 1200);
+                        // window.location = 'home.html';
+                        //     alert(response.Message);
                     }
                     if (statusCode == 401){
-                        alert(response.Message)
+                        document.getElementById("msg").style.backgroundColor = 'red';
+                        document.getElementById("msg").style.color = 'white';
+                        document.getElementById("msg").innerHTML = response.Message;
                     }
                     if (statusCode == 400){
-                        alert(response.Message)
+                        document.getElementById("msg").style.backgroundColor = 'red';
+                        document.getElementById("msg").style.color = 'white';
+                        document.getElementById("msg").innerHTML = response.Message;
                     }
                     console.log(response.Message)
                 })

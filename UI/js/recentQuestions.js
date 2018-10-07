@@ -6,6 +6,7 @@ function fetchQuestionData() {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'mode': 'no-cors',
             'Authorization': 'Bearer ' + token       
         },  
     })

@@ -9,6 +9,7 @@ function postData(event) {
             let password = document.getElementById("password").value;
             let confirm_password = document.getElementById("confirm_password").value;
 
+
             let user_data = JSON.stringify({
                 "first_name":first_name,
                 "last_name":last_name,
@@ -17,6 +18,7 @@ function postData(event) {
                 "password":password,
                 "confirm_password":confirm_password   
                 })
+                
 
             fetch('http://127.0.0.1:5000/api/v2/signup', {
                 method: 'POST',
@@ -31,17 +33,25 @@ function postData(event) {
                 })
                 .then((response) => {
                     if (statusCode == 201){
-                        alert(response.Message)
-                        window.location = 'login.html';
+                        document.getElementById("msg").style.backgroundColor = '#d4edda';
+                        var msg=document.getElementById("msg");
+                        msg.innerHTML=response.Message;
+                        window.setTimeout(() => window.location = 'login.html', 1200);
                     }
                     if (statusCode == 400){
-                        alert(response.Message)
+                        document.getElementById("msg").style.backgroundColor = 'red';
+                        document.getElementById("msg").style.color = 'white';
+                        document.getElementById("msg").innerHTML = response.Message;
                     }
                     if (statusCode == 401){
-                        alert(response.Message)
+                        document.getElementById("msg").style.backgroundColor = 'red';
+                        document.getElementById("msg").style.color = 'white';
+                        document.getElementById("msg").innerHTML = response.Message;
                     }
                     if (statusCode == 409){
-                        alert(response.Message)
+                        document.getElementById("msg").style.backgroundColor = 'red';
+                        document.getElementById("msg").style.color = 'white';
+                        document.getElementById("msg").innerHTML = response.Message;
                     }
                     console.log(response.Message)
                 })

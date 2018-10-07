@@ -24,19 +24,30 @@ fetch('http://127.0.0.1:5000/api/v2/question', {
     })
     .then((response) => {
         if (statusCode == 201){
-            alert(response.Message)
+            document.getElementById("msg").style.backgroundColor = '#d4edda';
+            document.getElementById("msg").style.color = 'black';
+            var msg=document.getElementById("msg");
+            msg.innerHTML=response.Message;
+            window.setTimeout(() => window.location = 'home.html', 1200);
+            // alert(response.Message)
             document.getElementById('quest-title').innerHTML=response.response[0].title;
             document.getElementById('quest-body').innerHTML=response.response[0].content;
 
         }
         if (statusCode == 401){
-            alert(response.Message)
+            document.getElementById("msg").style.backgroundColor = 'red';
+            document.getElementById("msg").style.color = 'white';
+            document.getElementById("msg").innerHTML = response.Message;
         }
         if (statusCode == 400){
-            alert(response.Message)
+            document.getElementById("msg").style.backgroundColor = 'red';
+            document.getElementById("msg").style.color = 'white';
+            document.getElementById("msg").innerHTML = response.Message;
         }
         if (statusCode == 409){
-            alert(response.Message)
+            document.getElementById("msg").style.backgroundColor = 'red';
+            document.getElementById("msg").style.color = 'white';
+            document.getElementById("msg").innerHTML = response.Message;
         }
         console.log(response.Message)
     })

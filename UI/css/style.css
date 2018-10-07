@@ -68,6 +68,7 @@ header{
 .wrap_q2{
     margin: auto;
     background: #7abcff;
+    transform: translate(38%,5%);
     margin-top: 10px;
     padding-bottom: 50px;
     float: left;
@@ -96,9 +97,6 @@ header{
 #quest-title{
     color: blue;
     text-align: center;
-}
-#quest-body{
-    
 }
 
 .post_q{
@@ -170,9 +168,7 @@ table{
     height: 50px;
     width: 50px;
     }
-#pro{
 
-  }
 span{
     font-weight: bold;
     color: white;
@@ -201,4 +197,13 @@ span{
     .column {
         width: 100%;
     }
+}
+.update{
+    display:none;
+}
+#errorresponse{
+    padding: 10px;
+}
+#msg{
+    padding: 10px;
 }

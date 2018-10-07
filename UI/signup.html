@@ -18,19 +18,18 @@
 
 	<div class="wrap">
 		<form id="postData" name="signUp" >
+				<p id="msg"></p>
 			<h2>Signup to Register</h2>
-			<input type="text" name="Fname" id="Fname" placeholder="Enter First Name">
-			<input type="text" name="Lname" id="Lname" placeholder="Enter Last Name">
-			<input type="email" name="email" id="email" placeholder="Enter your email">
-			<input type="text" name="username" id="username" placeholder="Enter username">
-			<input type="password" name="password" id="password" placeholder="Enter your password">
-			<input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm your password">
+			<input type="text" name="Fname" id="Fname" placeholder="Enter First Name" required>
+			<input type="text" name="Lname" id="Lname" placeholder="Enter Last Name" required>
+			<input type="email" name="email" id="email" placeholder="Enter your email" required>
+			<input type="text" name="username" id="username" placeholder="Enter username" required>
+			<input type="password" name="password" id="password" placeholder="Enter your password" required>
+			<input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm your password" required>
 			<br>
 			<br>
-			<input type="checkbox" name="checkbox" id="checkbox"> I agree to terms and conditions
+			<input type="checkbox" name="checkbox" id="checkbox" required=true> I agree to terms and conditions
 			<br>
-			<!-- validate function is called when submit button is clicked-->
-			<!-- <input type="submit" value="signUp" return validateForm()> -->
 			<input type="submit" value="signUp">
 		</form>
 	</div>

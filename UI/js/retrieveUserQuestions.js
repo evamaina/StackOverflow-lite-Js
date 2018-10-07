@@ -1,5 +1,5 @@
 let profile = document.getElementById('profile1')
-profile.addEventListener('load', fetchUserQuestionsData());
+profile.addEventListener('click', fetchUserQuestionsData());
 function fetchUserQuestionsData() { 
     let token = localStorage.getItem('token')
     fetch('http://127.0.0.1:5000/api/v2/question/', {
@@ -69,29 +69,33 @@ function fetchUserQuestionsData() {
 
 function deleteMyQuestion(question_id) { 
     let token = localStorage.getItem('token')
-    fetch('http://127.0.0.1:5000/api/v2/question/'+ question_id, {
-        method: 'DELETE',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token       
-        },   
-    })
-    .then((response) => {
-            statusCode = response.status
-            return response.json()
+    var result = confirm(" Are you sure you want delete this?");
+    if (result) {
+        fetch('http://127.0.0.1:5000/api/v2/question/'+ question_id, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token       
+            },   
         })
         .then((response) => {
-            if (statusCode == 200){
-                alert(response.Message)
-            }
-            if (statusCode == 401){
-                alert(response.Message)
-            }
-        
-            console.log(response.Message)
-        })
-        .catch((err) => console.log('Eve says '+err))   
+                statusCode = response.status
+                return response.json()
+            })
+            .then((response) => {
+                if (statusCode == 200){
+                    alert(response.Message)
+                    location.reload()
+                }
+                if (statusCode == 401){
+                    alert(response.Message)
+                }
+            
+                console.log(response.Message)
+            })
+            .catch((err) => console.log('Eve says '+err)) 
+    }
 }
 
 const MostAnsweredQuestion = (data) => {
@@ -102,10 +106,10 @@ const MostAnsweredQuestion = (data) => {
         let questionNode = document.createTextNode(data.most_answered[question].title);
         let h4 = document.createElement('h4');
         h4.setAttribute('id', 'h4' + data.most_answered[question].question_id);
-        // h4.addEventListener('click', () => {
-        //     question_id = data.mostAnswered[question].question_id;
-        //     fetchQuestion(question_id);
-        // })
+        h4.addEventListener('click', () => {
+            question_id = data.mostAnswered[question].question_id;
+            fetchQuestion(question_id);
+        })
         h4.appendChild(questionNode);
         td.appendChild(h4);
         tr.appendChild(td);
@@ -122,34 +126,22 @@ const MostAnsweredQuestion = (data) => {
 
 }
 const userAnswers = (data) => {
-    let table = document.getElementById('userAnswers')
-    for (let answer in data.my_answers) {
+    let table = document.getElementById('answersGiven')
+    document.getElementById('len-answers').innerHTML = 'Answers given'+'['+ data.my_answers.length+']'
+    console.log(data.my_answers.length)
+    for (let question in data.my_answers) {
         let tr = document.createElement('tr');
         let td = document.createElement('td');
-        let answerNode = document.createTextNode(data.my_answers[answer].myanswer);
+        let questionNode = document.createTextNode(data.my_answers[question].myanswer);
         let h4 = document.createElement('h4');
-        h4.setAttribute('id', 'h4' + data.my_answers[answer].answer_id);
+        h4.setAttribute('id', 'h4' + data.my_answers[question].question_id);
         h4.addEventListener('click', () => {
-            question_id = data.my_answers[answer].question_id;
+            question_id = data.my_answers[question].question_id;
             fetchQuestion(question_id);
         })
-        h4.appendChild(answerNode);
+        h4.appendChild(questionNode);
         td.appendChild(h4);
         tr.appendChild(td);
-        let editCell = document.createElement('td');
-        editElement = document.createElement('a');
-        editElement.setAttribute('id', 'edit' + data.my_answers[answer].answer_id);
-        editElement.setAttribute('class', 'edit');
-        editElement.addEventListener('click', () => {
-            let question_id = data.my_answers[answer].question_id;
-            let answer_id = data.my_answers[answer].answer_id;
-            let myAnswer = data.my_answers[answer].myanswer;
-            editAnswer(question_id, answer_id, myAnswer)
-        })
-        let edit = document.createTextNode('Edit');
-        editElement.appendChild(edit);
-        editCell.appendChild(editElement)
-        tr.appendChild(editCell)
         table.appendChild(tr);
     }
     console.log(data)

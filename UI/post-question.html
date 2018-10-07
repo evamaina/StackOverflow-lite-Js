@@ -13,17 +13,20 @@
       <a href="profile.html">Profile</a>
       <a href="post-question.html" class="active">Post Question</a>
       <a href="recent-questions.html">Recent Questions</a>
-      <a id="logout" onclick="logoutUser()">Logout</a>
+      <a href="index.html">Logout </a>
+      <!-- <a id="logout" onclick="logoutUser()">Logout</a> -->
     </div>
   </div>
   <br> 
     
       <h2 class="post_q">Post a Question</h2>
       <div class="wrap_q">
+      
       <div class="center">
+          <p id="msg"></p>
         <div class="wrapT">
-          <h3 id="quest-title">I have a very simple django app that I am attempting to deploy to heroku, but it keeps crashing. Everything works fine on my local machine, but not on heroku</h3>
-          <p id="quest-body">it's better to import models that you will user, since it won't visually collide with django.db.models</p></div>
+          <h3 id="quest-title"></h3>
+          <p id="quest-body"></p></div>
       
       <br>
         <input type="text" id="title" placeholder="Enter title">

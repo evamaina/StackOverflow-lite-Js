@@ -24,7 +24,10 @@ function fetchQuestionData() {
                     title.addEventListener('click', function titleClick(){
                         let clikedId = response.Questions[question].question_id;
                         localStorage.setItem('clickedId',clikedId)
-                        window.location = 'fetch-specific-question.html'
+                        var details = {'username':response.Questions[question].username,'date':response.Questions[question].posted_date};
+                        let user_details = JSON.stringify(details)
+                        localStorage.setItem('user_details', user_details)
+                        window.location = 'fetch-specific-question.html';
                     })
                     let author = document.createElement('p');
                     let date = document.createElement('a');
