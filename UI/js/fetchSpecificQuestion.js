@@ -1,4 +1,6 @@
 window.addEventListener('load', fetchSpecificQuestionData);
+let logged_in_user = localStorage.getItem('user_id_own')
+let user_who_posted_question = localStorage.getItem('user_who_posted_question')
 function fetchSpecificQuestionData() { 
     let question_id = localStorage.getItem('clickedId')
     let token = localStorage.getItem('token')
@@ -52,9 +54,11 @@ function fetchSpecificQuestionData() {
                 content.appendChild(heading)
                 parentElement.appendChild(textarea);
                 parentElement.appendChild(br);
+                
                 parentElement.appendChild(answerButton);
                 for (let answer in response.Question.answers){
                     let elemH5 = document.createElement('h5');
+                    
                     let currentAnswer = response.Question.answers[answer];
                     let answerStatus = currentAnswer.accepted ? " - Accepted" : "";
                     let actionText = currentAnswer.accepted ? "Reject" : "Accept";
@@ -62,10 +66,11 @@ function fetchSpecificQuestionData() {
                     let answerCreator = document.createElement('p');
                     let answerText = response.Question.answers[answer].username;
                     console.log(answerText)
-                    answerCreator.innerHTML = 'Posted by ' + answerText + ' On '+ response.Question.answers[answer].posted_date;
+                    answerCreator.innerHTML = 'Posted by ' + answerText + ' On '+ response.Question.answers[answer].posted_date ;
                     answerCreator.style.color='blue';
                     answerCreator.style.fontSize='11px'
                     answerCreator.style.fontStyle='italic';
+                
                     elemH5.appendChild(answerCreator)
                     let updateButton = document.createElement('input');
                     let edit = document.createElement('a');
@@ -96,12 +101,17 @@ function fetchSpecificQuestionData() {
                         //updateAnswerData();
                     })
                     //updateButton.setAttribute('value', 'Update')
+                    if (response.Question.answers[answer].user_id == logged_in_user){
                     updateButton.setAttribute('class', 'update')
                     updateButton.setAttribute('id', 'update')
+                    }
                     div.appendChild(textarea)
                     div.appendChild(edit)
                     div.appendChild(updateButton)
+                    let hr = document.createElement('hr')
+                   
                     if (answerStatus == "") {
+                        if (user_who_posted_question == logged_in_user){
                         let acceptButton = document.createElement('input');
                         acceptButton.setAttribute('type', 'button')
                         acceptButton.setAttribute('value', "Accept")
@@ -113,6 +123,8 @@ function fetchSpecificQuestionData() {
                             updateAnswerData();
                         })
                         div.appendChild(acceptButton)
+                        div.appendChild(hr)
+                    }
                     }
                     content.appendChild(elemH5)
                     content.appendChild(div)

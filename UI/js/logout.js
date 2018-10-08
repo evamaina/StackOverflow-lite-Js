@@ -15,7 +15,7 @@ function logoutUser() {
                 })
                 .then((response) => {
                     if (statusCode == 200){
-                        window.location.replace('index.html')
+                        window.location.replace('login.html')
                     } 
                     
                     console.log(response.Message)

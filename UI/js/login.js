@@ -28,7 +28,9 @@ function loginData(event) {
                         document.getElementById("msg").style.color = 'black';
                         // document.getElementById("errorresponse").innerHTML = response.Message;
                         token = response.token
+                        user_id = response.user_id
                         localStorage.setItem('token',token)
+                        localStorage.setItem('user_id_own', user_id)
                         console.log(localStorage.getItem('token'));
                         var msg=document.getElementById("msg");
                         msg.innerHTML=response.Message;
