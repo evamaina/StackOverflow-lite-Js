@@ -105,6 +105,7 @@ function fetchSpecificQuestionData() {
                     div.appendChild(edit)
                     div.appendChild(updateButton)
                     let hr = document.createElement('hr')
+                    div.appendChild(hr)
                    
                     if (answerStatus == "") {
                         if (user_who_posted_question == logged_in_user){
@@ -119,7 +120,7 @@ function fetchSpecificQuestionData() {
                             updateAnswerData();
                         })
                         div.appendChild(acceptButton)
-                        div.appendChild(hr)
+                        
                     }
                     }
                     content.appendChild(elemH5)

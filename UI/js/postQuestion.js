@@ -28,7 +28,7 @@ fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/question', {
             document.getElementById("msg").style.color = 'black';
             var msg=document.getElementById("msg");
             msg.innerHTML=response.Message;
-            window.setTimeout(() => window.location = 'home.html', 1200);
+            // window.setTimeout(() => window.location = 'home.html', 1200);
             // alert(response.Message)
             document.getElementById('quest-title').innerHTML=response.response[0].title;
             document.getElementById('quest-body').innerHTML=response.response[0].content;
