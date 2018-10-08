@@ -4,7 +4,7 @@ let user_who_posted_question = localStorage.getItem('user_who_posted_question')
 function fetchSpecificQuestionData() { 
     let question_id = localStorage.getItem('clickedId')
     let token = localStorage.getItem('token')
-    fetch('http://127.0.0.1:5000/api/v2/question/' + question_id, {
+    fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/question/' + question_id, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -75,8 +75,6 @@ function fetchSpecificQuestionData() {
                     let updateButton = document.createElement('input');
                     let edit = document.createElement('a');
                     edit.innerHTML = 'Edit'
-                    //updateButton.setAttribute('type', 'button')
-                    //updateButton.setAttribute('type', 'button')
                     let textarea = document.createElement('textarea');
                     textarea.attributes.required = "required";
                     textarea.style.display = 'none';
@@ -98,9 +96,7 @@ function fetchSpecificQuestionData() {
                             updateAnswerData();
                             
                         }
-                        //updateAnswerData();
                     })
-                    //updateButton.setAttribute('value', 'Update')
                     if (response.Question.answers[answer].user_id == logged_in_user){
                     updateButton.setAttribute('class', 'update')
                     updateButton.setAttribute('id', 'update')
@@ -150,7 +146,7 @@ function postAnswerData() {
         "answer_body":answer_body  
         })
 
-    fetch('http://127.0.0.1:5000/api/v2/questions/' + question_id +'/answers', {
+    fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/questions/' + question_id +'/answers', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -173,19 +169,16 @@ function postAnswerData() {
                 document.getElementById("msg").style.backgroundColor = 'red';
                 document.getElementById("msg").style.color = 'white';
                 document.getElementById("msg").innerHTML = response.Message;
-                // alert(response.Message)
             }
             if (statusCode == 400){
                 document.getElementById("msg").style.backgroundColor = 'red';
                 document.getElementById("msg").style.color = 'white';
                 document.getElementById("msg").innerHTML = response.Message;
-                // alert(response.Message)
             }
             if (statusCode == 409){
                 document.getElementById("msg").style.backgroundColor = 'red';
                 document.getElementById("msg").style.color = 'white';
                 document.getElementById("msg").innerHTML = response.Message;
-                // alert(response.message)
             }
             console.log(response.Message)
         })
@@ -203,7 +196,7 @@ function updateAnswerData() {
     let answer_data = JSON.stringify({
         "answer_body":answer_body  
         })
-    fetch('http://127.0.0.1:5000/api/v2/question/' + question_id +'/answers/' + answer_id + '/' + action, {
+    fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/question/' + question_id +'/answers/' + answer_id + '/' + action, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -233,7 +226,7 @@ function updateAnswerData() {
             if (statusCode == 400){
                 alert(response.Message)
             }
-            // console.log(response.Message)
+        
         })
         .catch((err) => console.log('Eve says '+err))
     }

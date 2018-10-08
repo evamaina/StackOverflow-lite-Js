@@ -9,7 +9,7 @@ function loginData(event) {
                 "password":password,  
                 })
 
-            fetch('http://127.0.0.1:5000/api/v2/login', {
+            fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/login', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -26,7 +26,6 @@ function loginData(event) {
                     if (statusCode == 200){
                         document.getElementById("msg").style.backgroundColor = '#d4edda';
                         document.getElementById("msg").style.color = 'black';
-                        // document.getElementById("errorresponse").innerHTML = response.Message;
                         token = response.token
                         user_id = response.user_id
                         localStorage.setItem('token',token)
@@ -35,8 +34,6 @@ function loginData(event) {
                         var msg=document.getElementById("msg");
                         msg.innerHTML=response.Message;
                         window.setTimeout(() => window.location = 'home.html', 1200);
-                        // window.location = 'home.html';
-                        //     alert(response.Message);
                     }
                     if (statusCode == 401){
                         document.getElementById("msg").style.backgroundColor = 'red';

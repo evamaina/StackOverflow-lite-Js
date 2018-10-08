@@ -2,7 +2,7 @@ window.addEventListener('load', fetchQuestionData);
 function fetchQuestionData() { 
     let token = localStorage.getItem('token')
 
-    fetch('http://127.0.0.1:5000/api/v2/questions', {
+    fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/questions', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -16,7 +16,6 @@ function fetchQuestionData() {
         })
         .then((response) => {
             if (statusCode == 200){
-                //alert(response.Questions)
                 let  parentElement = document.getElementById('all-quests');
                 console.log(response.Questions)
                 for (let question in response.Questions){

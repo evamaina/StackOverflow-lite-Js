@@ -1,6 +1,6 @@
 function logoutUser() {       
            
-            fetch('http://127.0.0.1:5000/api/v2/logout', {
+            fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/logout', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

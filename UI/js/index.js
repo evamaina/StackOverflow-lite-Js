@@ -1,7 +1,7 @@
 window.addEventListener('load', fetchQuestionData);
 function fetchQuestionData() { 
     let token = localStorage.getItem('token')   
-    fetch('http://127.0.0.1:5000/api/v2/recent-questions', {
+    fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/recent-questions', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',

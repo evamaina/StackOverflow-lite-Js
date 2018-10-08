@@ -2,7 +2,7 @@ let profile = document.getElementById('profile1')
 profile.addEventListener('click', fetchUserQuestionsData());
 function fetchUserQuestionsData() { 
     let token = localStorage.getItem('token')
-    fetch('http://127.0.0.1:5000/api/v2/question/', {
+    fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/question/', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -71,7 +71,7 @@ function deleteMyQuestion(question_id) {
     let token = localStorage.getItem('token')
     var result = confirm(" Are you sure you want delete this?");
     if (result) {
-        fetch('http://127.0.0.1:5000/api/v2/question/'+ question_id, {
+        fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/question/'+ question_id, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',

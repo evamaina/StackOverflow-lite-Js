@@ -20,7 +20,7 @@ function postData(event) {
                 })
                 
 
-            fetch('http://127.0.0.1:5000/api/v2/signup', {
+            fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
