@@ -68,24 +68,38 @@ function fetchSpecificQuestionData() {
                     answerCreator.style.fontStyle='italic';
                     elemH5.appendChild(answerCreator)
                     let updateButton = document.createElement('input');
-                    updateButton.setAttribute('type', 'button')
+                    let edit = document.createElement('a');
+                    edit.innerHTML = 'Edit'
+                    //updateButton.setAttribute('type', 'button')
+                    //updateButton.setAttribute('type', 'button')
                     let textarea = document.createElement('textarea');
+                    textarea.attributes.required = "required";
+                    textarea.style.display = 'none';
                     let div = document.createElement('div');
                     textarea.setAttribute('class', 'textarea');
                     textarea.setAttribute('rows', '2');
                     textarea.setAttribute('cols', '60');
                     textarea.setAttribute('id', 'textarea' + response.Question.answers[answer].answer_id)
-                    textarea.setAttribute('placeholder', response.Question.answers[answer].answer_body);
-                    updateButton.addEventListener('click', function(event){
+
+                    textarea.value = response.Question.answers[answer].answer_body;
+                    edit.addEventListener('click', function(event){
                         event.preventDefault();
                         localStorage.setItem('clickedUpdateId', response.Question.answers[answer].answer_id);
                         localStorage.setItem('action', "update");
-                        updateAnswerData();
+                        textarea.style.display = 'block'
+                        edit.innerHTML = 'Update'
+                        edit.onclick = (event) =>{
+                            event.preventDefault()
+                            updateAnswerData();
+                            
+                        }
+                        //updateAnswerData();
                     })
-                    updateButton.setAttribute('value', 'Update')
+                    //updateButton.setAttribute('value', 'Update')
                     updateButton.setAttribute('class', 'update')
                     updateButton.setAttribute('id', 'update')
                     div.appendChild(textarea)
+                    div.appendChild(edit)
                     div.appendChild(updateButton)
                     if (answerStatus == "") {
                         let acceptButton = document.createElement('input');
@@ -199,6 +213,7 @@ function updateAnswerData() {
             }
             if (statusCode == 201){
                 alert(response.Message)
+                location.reload()
             }
             if (statusCode == 401){
                 alert(response.Message)

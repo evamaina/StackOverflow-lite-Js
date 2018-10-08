@@ -199,11 +199,15 @@ span{
     }
 }
 .update{
-    display:none;
+    display:inline;
+    cursor: pointer;
 }
 #errorresponse{
     padding: 10px;
 }
 #msg{
     padding: 10px;
+}
+.textarea{
+    float: left;
 }
