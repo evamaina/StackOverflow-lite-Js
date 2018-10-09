@@ -167,19 +167,28 @@ function postAnswerData() {
                 alert(response.Message)
             }
             if (statusCode == 401){
-                document.getElementById("msg").style.backgroundColor = 'red';
+                document.getElementById("msg").style.backgroundColor = '#2E77BB';
                 document.getElementById("msg").style.color = 'white';
                 document.getElementById("msg").innerHTML = response.Message;
+                $(document).ready( function(){
+                    $('#msg').fadeOut(3000,function(){location.reload()});
+                })
             }
             if (statusCode == 400){
-                document.getElementById("msg").style.backgroundColor = 'red';
+                document.getElementById("msg").style.backgroundColor = '#2E77BB';
                 document.getElementById("msg").style.color = 'white';
                 document.getElementById("msg").innerHTML = response.Message;
+                $(document).ready( function(){
+                    $('#msg').fadeOut(3000,function(){location.reload()});
+                })
             }
             if (statusCode == 409){
-                document.getElementById("msg").style.backgroundColor = 'red';
+                document.getElementById("msg").style.backgroundColor = '#2E77BB';
                 document.getElementById("msg").style.color = 'white';
                 document.getElementById("msg").innerHTML = response.Message;
+                $(document).ready( function(){
+                    $('#msg').fadeOut(3000,function(){location.reload()});
+                })
             }
             console.log(response.Message)
         })

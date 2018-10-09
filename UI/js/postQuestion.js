@@ -28,31 +28,39 @@ fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/question', {
             document.getElementById("msg").style.color = 'black';
             var msg=document.getElementById("msg");
             msg.innerHTML=response.Message;
-            // window.setTimeout(() => window.location = 'home.html', 1200);
-            // alert(response.Message)
+            window.setTimeout(() => window.location = 'home.html', 1200);
             document.getElementById('quest-title').innerHTML=response.response[0].title;
             document.getElementById('quest-body').innerHTML=response.response[0].content;
 
         }
         if (statusCode == 401){
-            document.getElementById("msg").style.backgroundColor = 'red';
+            document.getElementById("msg").style.backgroundColor = '#2E77BB';
             document.getElementById("msg").style.color = 'white';
             document.getElementById("msg").innerHTML = response.Message;
+            $(document).ready( function(){
+                $('#msg').fadeOut(3000,function(){location.reload()});
+            })
         }
         if (statusCode == 400){
-            document.getElementById("msg").style.backgroundColor = 'red';
+            document.getElementById("msg").style.backgroundColor = '#2E77BB';
             document.getElementById("msg").style.color = 'white';
             document.getElementById("msg").innerHTML = response.Message;
+            $(document).ready( function(){
+                $('#msg').fadeOut(3000,function(){location.reload()});
+            })
         }
         if (statusCode == 409){
-            document.getElementById("msg").style.backgroundColor = 'red';
+            document.getElementById("msg").style.backgroundColor = '#2E77BB';
             document.getElementById("msg").style.color = 'white';
             document.getElementById("msg").innerHTML = response.Message;
+            $(document).ready( function(){
+                $('#msg').fadeOut(3000,function(){location.reload()});
+            })
         }
+
         console.log(response.Message)
     })
     .catch((err) => console.log('Eve says '+err))
-    
-    
-    
+  
 }
+
