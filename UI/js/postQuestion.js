@@ -3,6 +3,7 @@ function postQuestionData() {
 let title = document.getElementById("title").value;
 let content = document.getElementById("content").value;
 let token = localStorage.getItem('token')
+localStorage.setItem('isLoggedIn', false)
 let question_data = JSON.stringify({
     "title":title,
     "content":content,  
@@ -31,6 +32,7 @@ fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/question', {
             window.setTimeout(() => window.location = 'home.html', 1200);
             document.getElementById('quest-title').innerHTML=response.response[0].title;
             document.getElementById('quest-body').innerHTML=response.response[0].content;
+           
 
         }
         if (statusCode == 401){
@@ -38,24 +40,36 @@ fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/question', {
             document.getElementById("msg").style.color = 'white';
             document.getElementById("msg").innerHTML = response.Message;
             $(document).ready( function(){
-                $('#msg').fadeOut(3000,function(){location.reload()});
-            })
+                $('#msg').fadeOut(3000,function(){
+                    document.getElementById("msg").removeAttribute('style')
+                    document.getElementById("msg").innerHTML = ''; 
+                });
+                    
+            });
         }
         if (statusCode == 400){
             document.getElementById("msg").style.backgroundColor = '#2E77BB';
             document.getElementById("msg").style.color = 'white';
             document.getElementById("msg").innerHTML = response.Message;
             $(document).ready( function(){
-                $('#msg').fadeOut(3000,function(){location.reload()});
-            })
+                $('#msg').fadeOut(3000,function(){
+                    document.getElementById("msg").removeAttribute('style')
+                    document.getElementById("msg").innerHTML = ''; 
+                });
+                    
+            });
         }
         if (statusCode == 409){
             document.getElementById("msg").style.backgroundColor = '#2E77BB';
             document.getElementById("msg").style.color = 'white';
             document.getElementById("msg").innerHTML = response.Message;
             $(document).ready( function(){
-                $('#msg').fadeOut(3000,function(){location.reload()});
-            })
+                $('#msg').fadeOut(3000,function(){
+                    document.getElementById("msg").removeAttribute('style')
+                    document.getElementById("msg").innerHTML = ''; 
+                });
+                    
+            });
         }
 
         console.log(response.Message)

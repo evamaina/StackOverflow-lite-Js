@@ -4,6 +4,7 @@ let user_who_posted_question = localStorage.getItem('user_who_posted_question')
 function fetchSpecificQuestionData() { 
     let question_id = localStorage.getItem('clickedId')
     let token = localStorage.getItem('token')
+    localStorage.setItem('isLoggedIn', false)
     fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/question/' + question_id, {
         method: 'GET',
         headers: {
@@ -18,6 +19,7 @@ function fetchSpecificQuestionData() {
         })
         .then((response) => {
             if (statusCode == 200){
+                console.log(localStorage.getItem('isLoggedIn')) 
                 let  parentElement = document.getElementById('all-quests');
                 let title = document.createElement('h3');
                 let detailsParse = JSON.parse(localStorage.getItem('user_details'));
@@ -58,6 +60,7 @@ function fetchSpecificQuestionData() {
                 parentElement.appendChild(answerButton);
                 for (let answer in response.Question.answers){
                     let elemH5 = document.createElement('h5');
+                   
                     
                     let currentAnswer = response.Question.answers[answer];
                     let answerStatus = currentAnswer.accepted ? " - Accepted" : "";
@@ -73,8 +76,8 @@ function fetchSpecificQuestionData() {
                 
                     elemH5.appendChild(answerCreator)
                     let updateButton = document.createElement('input');
-                    let edit = document.createElement('a');
-                    edit.innerHTML = 'Edit'
+                    // let edit = document.createElement('a');
+                    // edit.innerHTML = 'Edit'
                     let textarea = document.createElement('textarea');
                     textarea.attributes.required = "required";
                     textarea.style.display = 'none';
@@ -85,27 +88,32 @@ function fetchSpecificQuestionData() {
                     textarea.setAttribute('id', 'textarea' + response.Question.answers[answer].answer_id)
 
                     textarea.value = response.Question.answers[answer].answer_body;
-                    edit.addEventListener('click', function(event){
-                        event.preventDefault();
-                        localStorage.setItem('clickedUpdateId', response.Question.answers[answer].answer_id);
-                        localStorage.setItem('action', "update");
-                        textarea.style.display = 'block'
-                        edit.innerHTML = 'Update'
-                        edit.onclick = (event) =>{
-                            event.preventDefault()
-                            updateAnswerData();
-                            
-                        }
-                    })
+                
                     if (response.Question.answers[answer].user_id == logged_in_user){
+                        let edit = document.createElement('a');
+                        edit.innerHTML = 'Edit'
+                        edit.addEventListener('click', function(event){
+                            event.preventDefault();
+                            localStorage.setItem('clickedUpdateId', response.Question.answers[answer].answer_id);
+                            localStorage.setItem('action', "update");
+                            textarea.style.display = 'block'
+                            edit.innerHTML = 'Update'
+                            edit.onclick = (event) =>{
+                                event.preventDefault()
+                                updateAnswerData();
+                                
+                            }
+                        })
+
                     updateButton.setAttribute('class', 'update')
                     updateButton.setAttribute('id', 'update')
+                    div.appendChild(edit)
                     }
                     div.appendChild(textarea)
-                    div.appendChild(edit)
+                    // div.appendChild(edit)
                     div.appendChild(updateButton)
                     let hr = document.createElement('hr')
-                    div.appendChild(hr)
+                    
                    
                     if (answerStatus == "") {
                         if (user_who_posted_question == logged_in_user){
@@ -116,13 +124,18 @@ function fetchSpecificQuestionData() {
                         acceptButton.addEventListener('click', function(event){
                             event.preventDefault();
                             localStorage.setItem('clickedAcceptId', response.Question.answers[answer].answer_id);
+                            console.log(response.Question.answers[answer].answer_id)
                             localStorage.setItem('action', "accept")
                             updateAnswerData();
                         })
                         div.appendChild(acceptButton)
                         
+                        
+                   
+                        
                     }
                     }
+                    div.appendChild(hr)
                     content.appendChild(elemH5)
                     content.appendChild(div)
                 }
@@ -132,10 +145,9 @@ function fetchSpecificQuestionData() {
             }
         
         })
-        .catch((err) => console.log('Eve says '+err))
+         .catch((err) => console.log('Eve says '+err))
            
 }
-
 
 
 function postAnswerData() { 
@@ -163,32 +175,53 @@ function postAnswerData() {
         })
         .then((response) => {
             if (statusCode == 200){
-                location.reload()
-                alert(response.Message)
+                document.getElementById("msg").style.backgroundColor = '#2E77BB';
+                document.getElementById("msg").style.color = 'black';
+                document.getElementById("msg").innerHTML = response.Message;
+                $(document).ready( function(){
+                    $('#msg').fadeOut(3000,function(){});
+                })
+                document.getElementById('all-quests').innerHTML=' ';
+                console.log(document.getElementById('all-quests'))
+                fetchSpecificQuestionData()
+                
+                
             }
             if (statusCode == 401){
                 document.getElementById("msg").style.backgroundColor = '#2E77BB';
                 document.getElementById("msg").style.color = 'white';
                 document.getElementById("msg").innerHTML = response.Message;
                 $(document).ready( function(){
-                    $('#msg').fadeOut(3000,function(){location.reload()});
-                })
+                    $('#msg').fadeOut(3000,function(){
+                        document.getElementById("msg").removeAttribute('style')
+                        document.getElementById("msg").innerHTML = ''; 
+                    });
+                        
+                });
             }
             if (statusCode == 400){
                 document.getElementById("msg").style.backgroundColor = '#2E77BB';
                 document.getElementById("msg").style.color = 'white';
                 document.getElementById("msg").innerHTML = response.Message;
                 $(document).ready( function(){
-                    $('#msg').fadeOut(3000,function(){location.reload()});
-                })
+                    $('#msg').fadeOut(3000,function(){
+                        document.getElementById("msg").removeAttribute('style')
+                        document.getElementById("msg").innerHTML = ''; 
+                    });
+                        
+                });
             }
             if (statusCode == 409){
                 document.getElementById("msg").style.backgroundColor = '#2E77BB';
                 document.getElementById("msg").style.color = 'white';
                 document.getElementById("msg").innerHTML = response.Message;
                 $(document).ready( function(){
-                    $('#msg').fadeOut(3000,function(){location.reload()});
-                })
+                    $('#msg').fadeOut(3000,function(){
+                        document.getElementById("msg").removeAttribute('style')
+                        document.getElementById("msg").innerHTML = ''; 
+                    });
+                        
+                });
             }
             console.log(response.Message)
         })
@@ -224,23 +257,63 @@ function updateAnswerData() {
         })
         .then((response) => {
             if (statusCode == 200){
-                alert(response.Message)
+                document.getElementById("msg").style.backgroundColor = '#2E77BB';
+                document.getElementById("msg").style.color = 'black';
+                document.getElementById("msg").innerHTML = response.Message;
+                $(document).ready( function(){
+                    $('#msg').fadeOut(3000,function(){});
+                })
+                document.getElementById('all-quests').innerHTML=' ';
+                console.log(document.getElementById('all-quests'))
+                fetchSpecificQuestionData()
+                // alert(response.Message)
             }
             if (statusCode == 201){
-                alert(response.Message)
-                location.reload()
+                document.getElementById("msg").style.backgroundColor = '#2E77BB';
+                document.getElementById("msg").style.color = 'black';
+                document.getElementById("msg").innerHTML = response.Message;
+                $(document).ready( function(){
+                    $('#msg').fadeOut(3000,function(){});
+                })
+                document.getElementById('all-quests').innerHTML=' ';
+                console.log(document.getElementById('all-quests'))
+                fetchSpecificQuestionData()
+                // alert(response.Message)
+                
             }
             if (statusCode == 401){
-                alert(response.Message)
+                document.getElementById("msg").style.backgroundColor = '#2E77BB';
+                document.getElementById("msg").style.color = 'white';
+                document.getElementById("msg").innerHTML = response.Message;
+                $(document).ready( function(){
+                    $('#msg').fadeOut(3000,function(){
+                        document.getElementById("msg").removeAttribute('style')
+                        document.getElementById("msg").innerHTML = ''; 
+                    });
+                        
+                });
+                // alert(response.Message)
+
             }
             if (statusCode == 400){
-                alert(response.Message)
+                document.getElementById("msg").style.backgroundColor = '#2E77BB';
+                document.getElementById("msg").style.color = 'white';
+                document.getElementById("msg").innerHTML = response.Message;
+                $(document).ready( function(){
+                    $('#msg').fadeOut(3000,function(){
+                        document.getElementById("msg").removeAttribute('style')
+                        document.getElementById("msg").innerHTML = ''; 
+                    });
+                        
+                });
+                // alert(response.Message)
             }
         
         })
         .catch((err) => console.log('Eve says '+err))
     }
 
+    
 const parseJwt = (token) => {
     try {
         payload = JSON.parse(atob(token.split('.')[1]));
@@ -250,3 +323,9 @@ const parseJwt = (token) => {
     }
   };
 console.log(parseJwt(localStorage.getItem('token')))
+
+const hideUrls = ()=>{
+    let isloggedIn = localStorage.getItem('isLoggedIn');
+    
+
+}

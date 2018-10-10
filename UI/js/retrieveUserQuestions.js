@@ -2,6 +2,7 @@ let profile = document.getElementById('profile1')
 profile.addEventListener('click', fetchUserQuestionsData());
 function fetchUserQuestionsData() { 
     let token = localStorage.getItem('token')
+    localStorage.setItem('isLoggedIn', false)
     fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/question/', {
         method: 'GET',
         headers: {
@@ -16,6 +17,7 @@ function fetchUserQuestionsData() {
         })
         .then((response) => {
             if (statusCode == 200){
+                // console.log(localStorage.getItem('isLoggedIn')) 
                 let parentElement = document.getElementById('UserQuestions')
                 let parentElementRecent = document.getElementById('recentQuestions')
 
@@ -85,6 +87,16 @@ function deleteMyQuestion(question_id) {
             })
             .then((response) => {
                 if (statusCode == 200){
+                    // document.getElementById("msg").style.backgroundColor = '#2E77BB';
+                    // document.getElementById("msg").style.color = 'white';
+                    // document.getElementById("msg").innerHTML = response.Message;
+                    // $(document).ready( function(){
+                    //     $('#msg').fadeOut(3000,function(){
+                    //         document.getElementById("msg").removeAttribute('style')
+                    //         document.getElementById("msg").innerHTML = ''; 
+                    //     });
+                            
+                    // });
                     alert(response.Message)
                     location.reload()
                 }

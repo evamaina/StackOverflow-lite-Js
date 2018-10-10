@@ -1,6 +1,7 @@
 window.addEventListener('load', fetchQuestionData);
 function fetchQuestionData() { 
-    let token = localStorage.getItem('token')   
+    let token = localStorage.getItem('token')  
+    localStorage.setItem('isLoggedIn', false) 
     fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/recent-questions', {
         method: 'GET',
         headers: {

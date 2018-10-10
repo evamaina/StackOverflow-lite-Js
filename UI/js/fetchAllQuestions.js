@@ -16,6 +16,7 @@ function fetchQuestionData() {
         })
         .then((response) => {
             if (statusCode == 200){
+                console.log(localStorage.getItem('isLoggedIn')) 
                 let  parentElement = document.getElementById('all-quests');
                 console.log(response.Questions)
                 for (let question in response.Questions){

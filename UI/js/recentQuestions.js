@@ -1,6 +1,7 @@
 window.addEventListener('load', fetchQuestionData);
 function fetchQuestionData() { 
-    let token = localStorage.getItem('token')   
+    let token = localStorage.getItem('token')  
+    localStorage.setItem('isLoggedIn', false) 
     fetch('https://stack-overflow-lit-api-heroku.herokuapp.com/api/v2/recent-questions', {
         method: 'GET',
         headers: {
@@ -18,6 +19,7 @@ function fetchQuestionData() {
     .then((response) => {
         if (statusCode == 200){
             console.log(response.Recently_asked)
+            console.log(localStorage.getItem('isLoggedIn')) 
             //alert(response.Questions)
             let  parentElement = document.getElementById('all-quests');
             for (let question in response.Recently_asked){

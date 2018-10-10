@@ -14,8 +14,9 @@ function logoutUser() {
                     return response.json()
                 })
                 .then((response) => {
+                    localStorage.removeItem('token')
                     if (statusCode == 200){
-                        window.location.replace('login.html')
+                        window.location.replace('home.html')
                     } 
                     
                     console.log(response.Message)

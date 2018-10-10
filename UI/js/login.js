@@ -1,3 +1,4 @@
+
 document.getElementById('loginData').addEventListener('submit', loginData);
 function loginData(event) {
             event.preventDefault();        
@@ -34,6 +35,7 @@ function loginData(event) {
                         var msg=document.getElementById("msg");
                         msg.innerHTML=response.Message;
                         window.setTimeout(() => window.location = 'home.html', 3000);
+
                     }
                     if (statusCode == 401){
                         document.getElementById("msg").style.backgroundColor = '#2E77BB';
