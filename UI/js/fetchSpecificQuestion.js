@@ -261,52 +261,58 @@ function updateAnswerData() {
                 document.getElementById("msg").style.color = 'black';
                 document.getElementById("msg").innerHTML = response.Message;
                 $(document).ready( function(){
-                    $('#msg').fadeOut(3000,function(){});
+                    $('#msg').fadeOut(3000,function(){
+                        document.getElementById("msg").removeAttribute('style')
+                        document.getElementById("msg").innerHTML = ''; 
+                    });
                 })
                 document.getElementById('all-quests').innerHTML=' ';
                 console.log(document.getElementById('all-quests'))
                 fetchSpecificQuestionData()
-                // alert(response.Message)
             }
             if (statusCode == 201){
                 document.getElementById("msg").style.backgroundColor = '#2E77BB';
                 document.getElementById("msg").style.color = 'black';
                 document.getElementById("msg").innerHTML = response.Message;
                 $(document).ready( function(){
-                    $('#msg').fadeOut(3000,function(){});
+                    $('#msg').fadeOut(3000,function(){
+                        document.getElementById("msg").removeAttribute('style')
+                        document.getElementById("msg").innerHTML = ''; 
+                    });
                 })
                 document.getElementById('all-quests').innerHTML=' ';
                 console.log(document.getElementById('all-quests'))
                 fetchSpecificQuestionData()
-                // alert(response.Message)
                 
             }
             if (statusCode == 401){
                 document.getElementById("msg").style.backgroundColor = '#2E77BB';
-                document.getElementById("msg").style.color = 'white';
+                document.getElementById("msg").style.color = 'black';
                 document.getElementById("msg").innerHTML = response.Message;
                 $(document).ready( function(){
                     $('#msg').fadeOut(3000,function(){
                         document.getElementById("msg").removeAttribute('style')
                         document.getElementById("msg").innerHTML = ''; 
                     });
-                        
-                });
-                // alert(response.Message)
+                })
+                document.getElementById('all-quests').innerHTML=' ';
+                console.log(document.getElementById('all-quests'))
+                fetchSpecificQuestionData()
 
             }
             if (statusCode == 400){
                 document.getElementById("msg").style.backgroundColor = '#2E77BB';
-                document.getElementById("msg").style.color = 'white';
+                document.getElementById("msg").style.color = 'black';
                 document.getElementById("msg").innerHTML = response.Message;
                 $(document).ready( function(){
                     $('#msg').fadeOut(3000,function(){
                         document.getElementById("msg").removeAttribute('style')
                         document.getElementById("msg").innerHTML = ''; 
                     });
-                        
-                });
-                // alert(response.Message)
+                })
+                document.getElementById('all-quests').innerHTML=' ';
+                console.log(document.getElementById('all-quests'))
+                fetchSpecificQuestionData()
             }
         
         })
