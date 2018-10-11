@@ -3,12 +3,14 @@ body{
    font-family: Arial,Sans-Serif, Helvetica;
    background-color: #7abcff;
 }
-header{
+.header{
     padding: 20px 15px;
     overflow: hidden;
 }
+
 .header a {
     float: left;
+    overflow: auto;
     text-align: center;
     text-decoration: none;
     color: black;
@@ -67,26 +69,27 @@ header{
     padding-bottom: 50px;
 }
 .wrap_q2{
-    margin: auto;
+    margin: 0 auto;
     background: #7abcff;
-    transform: translate(38%);
-    margin-top: 10px;
     padding-bottom: 50px;
-    float: left;
+    display: block;
+    width: 70%;
+    overflow: auto;
+
 }
 .wrap_q3{
-    margin: auto;
+    margin: 0 auto;
     background: #7abcff;
-    transform: translate(10%,10%);
     margin-top: 10px;
     padding-bottom: 50px;
-    float: left;
+    overflow: auto;
+    display: block;
+    width: 70%;
 }
 
-.wrapT{
-    position : relative;   
-    width: 800px;
-    height: auto;
+.wrapT{ 
+    width: 100%;
+    overflow: auto;
     padding: 10px;
     font-size: 1em;
     border-radius: 25px;
@@ -144,6 +147,7 @@ h2{
     color: white;
     padding: 10px;
     border-radius: 10px;
+
 }
 input{
     padding: 10px;
