@@ -76,8 +76,6 @@ function fetchSpecificQuestionData() {
                 
                     elemH5.appendChild(answerCreator)
                     let updateButton = document.createElement('input');
-                    // let edit = document.createElement('a');
-                    // edit.innerHTML = 'Edit'
                     let textarea = document.createElement('textarea');
                     textarea.attributes.required = "required";
                     textarea.style.display = 'none';
@@ -128,11 +126,7 @@ function fetchSpecificQuestionData() {
                             localStorage.setItem('action', "accept")
                             updateAnswerData();
                         })
-                        div.appendChild(acceptButton)
-                        
-                        
-                   
-                        
+                        div.appendChild(acceptButton)         
                     }
                     }
                     div.appendChild(hr)
@@ -257,7 +251,7 @@ function updateAnswerData() {
         })
         .then((response) => {
             if (statusCode == 200){
-                document.getElementById("msg").style.backgroundColor = '#2E77BB';
+                document.getElementById("msg").style.backgroundColor = '#d4edda';
                 document.getElementById("msg").style.color = 'black';
                 document.getElementById("msg").innerHTML = response.Message;
                 $(document).ready( function(){
@@ -271,7 +265,7 @@ function updateAnswerData() {
                 fetchSpecificQuestionData()
             }
             if (statusCode == 201){
-                document.getElementById("msg").style.backgroundColor = '#2E77BB';
+                document.getElementById("msg").style.backgroundColor = '#d4edda';
                 document.getElementById("msg").style.color = 'black';
                 document.getElementById("msg").innerHTML = response.Message;
                 $(document).ready( function(){
